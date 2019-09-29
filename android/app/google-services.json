@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1051288116915",
+    "firebase_url": "https://city-info-299e5.firebaseio.com",
+    "project_id": "city-info-299e5",
+    "storage_bucket": "city-info-299e5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1051288116915:android:9c94c38031422296abdac6",
+        "android_client_info": {
+          "package_name": "uz.handbook.cityinfo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1051288116915-3n3qrk1b3nuvk6haud90hfhgen9fcj0c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAEcZYr_id_z7WUMFdSdPceI2ynl1ZU_Rg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1051288116915-3n3qrk1b3nuvk6haud90hfhgen9fcj0c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
