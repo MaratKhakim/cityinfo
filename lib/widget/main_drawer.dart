@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../screen/profile_screen.dart';
+import '../utils/app_localizations.dart';
 
 class MainDrawer extends StatelessWidget {
   @override
@@ -32,7 +33,7 @@ class MainDrawer extends StatelessWidget {
           ),
           ListTile(
             leading: Icon(Icons.settings),
-            title: Text('Settings'),
+            title: Text(AppLocalizations.of(context).translate('SETTINGS')),
             onTap: () {
               Navigator.of(context).pop();
               Navigator.of(context).pushNamed(ProfileScreen.routName);
@@ -41,12 +42,12 @@ class MainDrawer extends StatelessWidget {
           Divider(),
           ListTile(
             leading: Icon(Icons.rate_review),
-            title: Text('Rate us!'),
+            title: Text(AppLocalizations.of(context).translate('RATE_US')),
             onTap: () {},
           ),
           ListTile(
             leading: Icon(Icons.label),
-            title: Text('About us'),
+            title: Text(AppLocalizations.of(context).translate('ABOUT_US')),
             onTap: () {},
           ),
         ],

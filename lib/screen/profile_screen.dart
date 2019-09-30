@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../utils/app_localizations.dart';
+
 class ProfileScreen extends StatefulWidget {
   static const routName = '/profile_page';
 
@@ -13,7 +15,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Scaffold(
       backgroundColor: Colors.blueGrey[100],
       appBar: AppBar(
-        title: Text('Profile'),
+        title: Text(AppLocalizations.of(context).translate('PROFILE')),
       ),
       body: Container(
         height: MediaQuery.of(context).size.height,
@@ -39,8 +41,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       children: <Widget>[
                         TextFormField(
                           decoration: InputDecoration(
-                            hintText: 'Name',
-                            labelText: 'Name',
+                            hintText: AppLocalizations.of(context).translate('NAME'),
+                            labelText: AppLocalizations.of(context).translate('NAME'),
                             border: OutlineInputBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(10)),
@@ -51,8 +53,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         SizedBox(height: 20),
                         TextFormField(
                           decoration: InputDecoration(
-                            hintText: 'Surname',
-                            labelText: 'Surname',
+                            hintText: AppLocalizations.of(context).translate('SURNAME'),
+                            labelText: AppLocalizations.of(context).translate('SURNAME'),
                             border: OutlineInputBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(10)),
@@ -67,7 +69,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 SizedBox(height: 30),
                 RaisedButton(
                   child: Text(
-                    'Save',
+                    AppLocalizations.of(context).translate('SAVE'),
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 18,
