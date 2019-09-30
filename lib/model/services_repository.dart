@@ -1,28 +1,20 @@
 import 'service.dart';
 
+import '../utils/app_localizations.dart';
+
 class ServicesRepository {
-  static List<Service> loadServices() {
-    /*var allServices = <Service>[
-      Service(name: 'Taxi', imageUrl: 'assets/taxi.png'),
-      Service(name: 'Restaurants',imageUrl:  'assets/restaurants.jpg'),
-      Service(name: 'Sport',imageUrl:  'assets/sport.png'),
-      Service(name: 'Service',imageUrl:  'assets/service.png'),
-      Service(name: 'Hotel',imageUrl:  'assets/hotel.png'),
-      Service(name: 'Online',imageUrl:  'assets/online.png'),
-      Service(name: 'Culture',imageUrl:  'assets/culture.png'),
-      Service(name: 'Transport',imageUrl:  'assets/transport.png'),
-  ];*/
+  static List<Service> loadServices(context) {
     var url = 'http://handbook.uz/images/service_logo';
     var allServices = <Service>[
-      Service(name: 'Taxi', imageUrl: '$url/logo_taxi.png'),
-      Service(name: 'Restaurants',imageUrl:  '$url/logo_cafe.png'),
-      Service(name: 'Supermarket',imageUrl:  '$url/logo_supermarket.png'),
-      Service(name: 'Sport',imageUrl:  '$url/logo_sport.png'),
-      Service(name: 'Transport',imageUrl:  '$url/logo_transport.png'),
-      Service(name: 'Service',imageUrl:  '$url/logo_service.png'),
-      Service(name: 'Hotel',imageUrl:  '$url/logo_hotel.png'),
-      Service(name: 'Culture',imageUrl:  '$url/logo_culture.png'),
+      Service(name: AppLocalizations.of(context).translate('TAXI'), imageUrl: '$url/logo_taxi.png'),
+      Service(name: AppLocalizations.of(context).translate('RESTAURANT'), imageUrl: '$url/logo_cafe.png'),
+      Service(name: AppLocalizations.of(context).translate('SUPERMARKET'), imageUrl: '$url/logo_supermarket.png'),
+      Service(name: AppLocalizations.of(context).translate('SPORT'), imageUrl: '$url/logo_sport.png'),
+      Service(name: AppLocalizations.of(context).translate('TRANSPORT'), imageUrl: '$url/logo_transport.png'),
+      Service(name: AppLocalizations.of(context).translate('SERVICE'), imageUrl: '$url/logo_service.png'),
+      Service(name: AppLocalizations.of(context).translate('HOTEL'), imageUrl: '$url/logo_hotel.png'),
+      Service(name: AppLocalizations.of(context).translate('CULTURE'), imageUrl: '$url/logo_culture.png'),
     ];
     return allServices;
-}
+  }
 }

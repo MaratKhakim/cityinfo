@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'widget/main_drawer.dart';
 import 'widget/service_card.dart';
+import 'model/service.dart';
+import 'model/services_repository.dart';
+import 'utils/app_localizations.dart';
 
 class MyHomePage extends StatefulWidget {
 
@@ -16,18 +19,18 @@ class _MyHomePageState extends State<MyHomePage> {
   int cityId = 2;
 
   Map<int, String> _mapCities = {
-    1: 'Kokand',
-    2: 'Tashkent',
-    3: 'Ferghana',
-    4: 'Andijan',
-    5: 'Namangan',
+    1: 'KOKAND',
+    2: 'TASHKENT',
+    3: 'FERGHANA',
+    4: 'ANDIJAN',
+    5: 'NAMANGAN',
   };
 
   List<Widget> _buildMenu(context) {
     return List.generate(
       5,
       (int index) => ListTile(
-        title: Text(_mapCities[index + 1]),
+        title: Text(AppLocalizations.of(context).translate(_mapCities[index + 1])),
         onTap: () {
           setState(() {
             cityId = index+1;
@@ -39,8 +42,11 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   List<Widget> _buildCards(BuildContext context, int count) {
+
+    List<Service> _services = ServicesRepository.loadServices(context);
+
     List<Widget> cards =
-        List.generate(count, (int index) => ServiceCard(cityId, ++index));
+        List.generate(count, (int index) => ServiceCard(_services, cityId, ++index));
     return cards;
   }
 
@@ -69,7 +75,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text('City Info'),
         actions: <Widget>[
-          Center(child: Text(_mapCities[cityId])),
+          Center(child: Text(AppLocalizations.of(context).translate(_mapCities[cityId]))),
           IconButton(
             icon: Icon(Icons.location_city),
             onPressed: () => _showModal(context),

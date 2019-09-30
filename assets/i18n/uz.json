@@ -1,0 +1,22 @@
+{
+  "SETTINGS": "Sozlamalar",
+  "NAME": "Ism",
+  "SURNAME": "Familiya",
+  "RATE_US": "Baholash",
+  "ABOUT_US": "Biz haqimizda",
+  "TAXI": "Taksi",
+  "RESTAURANT": "Restoran",
+  "SUPERMARKET": "Supermarket",
+  "SPORT": "Sport",
+  "TRANSPORT": "Transport",
+  "SERVICE": "Servis",
+  "HOTEL": "Mehmonxona",
+  "CULTURE": "Ma'daniyat",
+  "KOKAND": "Qo'qon",
+  "TASHKENT": "Toshkent",
+  "FERGHANA": "Farg'ona",
+  "ANDIJAN": "Andijon",
+  "NAMANGAN": "Namangan",
+  "SAVE": "Saqlash",
+  "PROFILE": "Profil"
+}

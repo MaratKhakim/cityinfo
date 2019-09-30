@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
 
 import '../model/service.dart';
-import '../model/services_repository.dart';
 import '../network/network.dart';
 import '../screen/service_list_screen.dart';
 
 class ServiceCard extends StatelessWidget {
   final int _index;
   final int _cityId;
+  final List<Service> _services;
 
-  ServiceCard(this._cityId, this._index);
-
-  List<Service> services = ServicesRepository.loadServices();
+  ServiceCard(this._services, this._cityId, this._index);
 
   List<dynamic> restaurants;
 
@@ -30,7 +28,7 @@ class ServiceCard extends StatelessWidget {
             ServiceListScreen.routName,
             arguments: {
               'index': _index.toString(),
-              'title': services[_index - 1].name,
+              'title': _services[_index - 1].name,
               'serviceList': restaurants,
             },
           );
@@ -43,12 +41,12 @@ class ServiceCard extends StatelessWidget {
                 height: 120,
                 width: 120,
                 padding: EdgeInsets.all(10.0),
-                child: Image.network(services[_index - 1].imageUrl),
+                child: Image.network(_services[_index - 1].imageUrl),
               ),
             ),
             Container(
               child: Text(
-                services[_index - 1].name,
+                _services[_index - 1].name,
                 style: TextStyle(
                   color: Theme.of(context).primaryColor,
                   fontWeight: FontWeight.bold,
