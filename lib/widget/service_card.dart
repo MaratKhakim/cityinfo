@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../model/service.dart';
-import '../network/network.dart';
 import '../screen/service_list_screen.dart';
 
 class ServiceCard extends StatelessWidget {
@@ -10,8 +9,6 @@ class ServiceCard extends StatelessWidget {
   final List<Service> _services;
 
   ServiceCard(this._services, this._cityId, this._index);
-
-  List<dynamic> restaurants;
 
   @override
   Widget build(BuildContext context) {
@@ -22,14 +19,13 @@ class ServiceCard extends StatelessWidget {
       ),
       elevation: 6,
       child: InkWell(
-        onTap: () async {
-          restaurants = await Network.fetchService(_cityId, _index);
+        onTap: () {
           Navigator.of(context).pushNamed(
             ServiceListScreen.routName,
             arguments: {
               'index': _index.toString(),
               'title': _services[_index - 1].name,
-              'serviceList': restaurants,
+              'cityId': _cityId.toString(),
             },
           );
         },

@@ -1,28 +1,27 @@
 import 'package:flutter/material.dart';
 
-import '../model/restaurant.dart';
-import '../screen/restaurants_screen.dart';
+import '../model/category.dart';
 import '../network/network.dart';
+import '../screen/category_screen.dart';
 
 class ListComponents extends StatelessWidget {
+  final List<Category> _categories;
 
-  final List<Restaurant> _restaurants;
-
-  ListComponents(this._restaurants);
+  ListComponents(this._categories);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.all(8),
       child: ListView.builder(
-        itemCount: _restaurants.length,
+        itemCount: _categories.length,
         itemBuilder: (context, index) {
           return InkWell(
             onTap: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => RestaurantScreen(_restaurants[index]),
+                  builder: (context) => CategoryScreen(_categories[index]),
                 ),
               );
             },
@@ -30,11 +29,12 @@ class ListComponents extends StatelessWidget {
               elevation: 6,
               child: ListTile(
                 leading: Hero(
-                  tag: _restaurants[index].name,
-                  child: Image.network('${Network.imageURL}/${_restaurants[index].imageUrl}'),
+                  tag: _categories[index].name,
+                  child: Image.network(
+                      '${Network.imageURL}/${_categories[index].imageUrl}'),
                 ),
                 title: Text(
-                  _restaurants[index].name,
+                  _categories[index].name,
                   maxLines: 1,
                   style: TextStyle(
                     fontSize: 16,
@@ -42,7 +42,7 @@ class ListComponents extends StatelessWidget {
                   ),
                 ),
                 subtitle: Text(
-                  _restaurants[index].address,
+                  _categories[index].address,
                   maxLines: 1,
                 ),
                 trailing: Icon(

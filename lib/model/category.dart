@@ -1,5 +1,5 @@
 
-class Restaurant {
+class Category {
 
   String id;
   String description;
@@ -13,7 +13,7 @@ class Restaurant {
   String workPeriod;
   String website;
 
-  Restaurant.fromJson(Map<String, dynamic> parsedJson) {
+  Category.fromJson(Map<String, dynamic> parsedJson) {
     id = parsedJson['id'].toString();
     name = parsedJson['title'];
     description = parsedJson['description'];

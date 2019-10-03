@@ -29,9 +29,9 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.deepPurple,
       ),
       supportedLocales: [
-        Locale('ru', 'RU'),
-        Locale('en', 'US'),
-        Locale('uz', 'UZ'),
+        Locale('ru'),
+        Locale('en'),
+        Locale('uz'),
       ],
       localizationsDelegates: [
         AppLocalizations.delegate,
@@ -40,8 +40,7 @@ class MyApp extends StatelessWidget {
       ],
       localeResolutionCallback: (locale, supportedLocales) {
         for (var supportedLocale in supportedLocales) {
-          if (supportedLocale.languageCode == locale.languageCode &&
-              supportedLocale.countryCode == locale.countryCode) {
+          if (supportedLocale.languageCode == locale.languageCode) {
             return supportedLocale;
           }
         }

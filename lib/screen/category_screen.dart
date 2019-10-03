@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../model/restaurant.dart';
+import '../model/category.dart';
 import '../network/network.dart';
 
-class RestaurantScreen extends StatelessWidget {
-  static const routName = '/restaurant';
+class CategoryScreen extends StatelessWidget {
+  static const routName = '/category_screen';
 
-  Restaurant _restaurant;
+  Category _restaurant;
 
-  RestaurantScreen(this._restaurant);
+  CategoryScreen(this._restaurant);
 
   Widget _openUrl(String scheme, String url, IconData icon) {
     return InkWell(

@@ -1,7 +1,12 @@
+/**
+  @author: devefy
+  This code is taken from https://github.com/devefy/Flutter-Story-App-UI
+*/
+
 import 'package:flutter/material.dart';
 import 'dart:math';
 
-import '../model/restaurant.dart';
+import '../model/category.dart';
 import '../network/network.dart';
 
 var cardAspectRatio = 12.0 / 20.0;
@@ -10,7 +15,7 @@ var widgetAspectRatio = cardAspectRatio * 1.2;
 var currentPage;
 
 class SlideComponents extends StatefulWidget {
-  final List<Restaurant> _restaurants;
+  final List<Category> _restaurants;
 
   SlideComponents(this._restaurants) {
     currentPage = _restaurants.length - 1.0;
@@ -70,7 +75,7 @@ class CardScrollWidget extends StatelessWidget {
   var padding = 20.0;
   var verticalInset = 20.0;
 
-  final List<Restaurant> _restaurants;
+  final List<Category> _restaurants;
 
   CardScrollWidget(this._restaurants, this.currentPage);
 
