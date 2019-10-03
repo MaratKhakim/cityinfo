@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'widget/main_drawer.dart';
 import 'widget/service_card.dart';
@@ -16,7 +17,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
-  int cityId = 2;
+  int _cityId = 2;
 
   Map<int, String> _mapCities = {
     1: 'KOKAND',
@@ -26,15 +27,39 @@ class _MyHomePageState extends State<MyHomePage> {
     5: 'NAMANGAN',
   };
 
+  @override
+  void initState() {
+    super.initState();
+    _setInitCidyId();
+  }
+
+  Future<int> _getCityIdFromSharedPrefs() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getInt('city') ?? 2;
+  }
+
+  Future<void> _setCityId(int id) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setInt('city', id);
+  }
+
+  Future<void> _setInitCidyId() async {
+    int _id = await _getCityIdFromSharedPrefs();
+    setState(() {
+      _cityId = _id;
+    });
+  }
+
   List<Widget> _buildMenu(context) {
     return List.generate(
       5,
       (int index) => ListTile(
         title: Text(AppLocalizations.of(context).translate(_mapCities[index + 1])),
-        onTap: () {
+        onTap: () async {
           setState(() {
-            cityId = index+1;
+            _cityId = index+1;
           });
+          await _setCityId(index+1);
           Navigator.of(context).pop();
         },
       ),
@@ -46,7 +71,7 @@ class _MyHomePageState extends State<MyHomePage> {
     List<Service> _services = ServicesRepository.loadServices(context);
 
     List<Widget> cards =
-        List.generate(count, (int index) => ServiceCard(_services, cityId, ++index));
+        List.generate(count, (int index) => ServiceCard(_services, _cityId, ++index));
     return cards;
   }
 
@@ -75,7 +100,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text('City Info'),
         actions: <Widget>[
-          Center(child: Text(AppLocalizations.of(context).translate(_mapCities[cityId]))),
+          Center(child: Text(AppLocalizations.of(context).translate(_mapCities[_cityId]))),
           IconButton(
             icon: Icon(Icons.location_city),
             onPressed: () => _showModal(context),
