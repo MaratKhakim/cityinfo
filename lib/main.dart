@@ -23,10 +23,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'City Info',
+      title: 'handbook',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.deepPurple,
+        primarySwatch: Colors.blue,
+        primaryColor: Color(0xFF2D5E89),
       ),
       supportedLocales: [
         Locale('ru'),
@@ -58,7 +59,9 @@ class MyApp extends StatelessWidget {
             //return snapshot.hasData ? MyHomePage() : LoginScreen();
             return MyHomePage();
           } else {
-            return LoadingCircle();
+            return Scaffold(
+              body: LoadingCircle(),
+            );
           }
         },
       ),

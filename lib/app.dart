@@ -96,9 +96,9 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      backgroundColor: Colors.deepPurple[200],
+      backgroundColor: Colors.blue[50],
       appBar: AppBar(
-        title: Text('City Info'),
+        title: Text('handbook'),
         actions: <Widget>[
           Center(child: Text(AppLocalizations.of(context).translate(_mapCities[_cityId]))),
           IconButton(

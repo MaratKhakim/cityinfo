@@ -5,6 +5,7 @@ import '../network/network.dart';
 import '../widget/list_components.dart';
 import '../widget/loading_circle.dart';
 import '../widget/slide_components.dart';
+import '../utils/app_localizations.dart';
 
 class ServiceListScreen extends StatefulWidget {
   static const routName = '/service_list_screen';
@@ -14,17 +15,35 @@ class ServiceListScreen extends StatefulWidget {
 }
 
 class _ServiceListScreenState extends State<ServiceListScreen> {
+
+  void _retry() {
+    setState(() {});
+  }
+
   Widget _buildBody(AsyncSnapshot<List<dynamic>> snapshot, int index) {
 
-    print('snapshot: ${snapshot.connectionState} and ${snapshot.hasError}');
-    if (snapshot.connectionState != ConnectionState.none && !snapshot.hasData) {
+    if (snapshot.connectionState != ConnectionState.done) {
       return LoadingCircle();
     }
-    final List<Category> _categories =
-        snapshot.data.map((i) => Category.fromJson(i)).toList();
-    return index & 1 == 0
-        ? ListComponents(_categories)
-        : SlideComponents(_categories);
+
+    if (snapshot.hasData) {
+      final List<Category> _categories =
+          snapshot.data.map((i) => Category.fromJson(i)).toList();
+      return index & 1 == 0
+          ? ListComponents(_categories)
+          : SlideComponents(_categories);
+    } else {
+      return AlertDialog(
+        title: Text(AppLocalizations.of(context).translate('ERROR_OCCURED_TITLE')),
+        content: Text(AppLocalizations.of(context).translate('ERROR_OCCURED_CONTENT')),
+        actions: <Widget>[
+          FlatButton(
+            child: Text(AppLocalizations.of(context).translate('RETRY')),
+            onPressed: _retry,
+          )
+        ],
+      );
+    }
   }
 
   @override

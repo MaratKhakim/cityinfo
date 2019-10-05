@@ -18,5 +18,8 @@
   "ANDIJAN": "Андижан",
   "NAMANGAN": "Наманган",
   "SAVE": "Сохранить",
-  "PROFILE": "Профиль"
+  "PROFILE": "Профиль",
+  "ERROR_OCCURED_TITLE": "Произошла ошибка!",
+  "ERROR_OCCURED_CONTENT": "Не удалось получить эту информацию",
+  "RETRY": "Повторить"
 }

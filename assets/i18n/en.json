@@ -18,5 +18,8 @@
   "ANDIJAN": "Andijan",
   "NAMANGAN": "Namangan",
   "SAVE": "Save",
-  "PROFILE": "Profile"
+  "PROFILE": "Profile",
+  "ERROR_OCCURED_TITLE": "An error occured!",
+  "ERROR_OCCURED_CONTENT": "Something went wrong",
+  "RETRY": "Retry"
 }

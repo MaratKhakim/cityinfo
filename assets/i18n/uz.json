@@ -18,5 +18,8 @@
   "ANDIJAN": "Andijon",
   "NAMANGAN": "Namangan",
   "SAVE": "Saqlash",
-  "PROFILE": "Profil"
+  "PROFILE": "Profil",
+  "ERROR_OCCURED_TITLE": "Xato",
+  "ERROR_OCCURED_CONTENT": "Bu ma'lumotni olish vaqtida xato yuz berdi",
+  "RETRY": "Retry"
 }
