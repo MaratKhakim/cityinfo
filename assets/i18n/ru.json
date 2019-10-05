@@ -21,5 +21,10 @@
   "PROFILE": "Профиль",
   "ERROR_OCCURED_TITLE": "Произошла ошибка!",
   "ERROR_OCCURED_CONTENT": "Не удалось получить эту информацию",
-  "RETRY": "Повторить"
+  "RETRY": "Повторить",
+  "LOGIN": "Логин",
+  "ENTER_PHONE_NUMBER": "Введите ваш номер",
+  "PHONE_ERROR_MESSAGE": "Требуется 9 цифров",
+  "ENTER_CODE": "Введите СМС код",
+  "ENTER_VALID_CODE": "Введите правильный код"
 }

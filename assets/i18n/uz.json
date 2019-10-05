@@ -21,5 +21,10 @@
   "PROFILE": "Profil",
   "ERROR_OCCURED_TITLE": "Xato",
   "ERROR_OCCURED_CONTENT": "Bu ma'lumotni olish vaqtida xato yuz berdi",
-  "RETRY": "Retry"
+  "RETRY": "Retry",
+  "LOGIN": "Login",
+  "ENTER_PHONE_NUMBER": "Mobil raqamingizni kiriting",
+  "PHONE_ERROR_MESSAGE": "9ta raqam kiriting",
+  "ENTER_CODE": "SMS kodni kiriting",
+  "ENTER_VALID_CODE": "To'g'ri kodni kiriting"
 }

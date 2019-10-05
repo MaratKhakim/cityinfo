@@ -21,5 +21,10 @@
   "PROFILE": "Profile",
   "ERROR_OCCURED_TITLE": "An error occured!",
   "ERROR_OCCURED_CONTENT": "Something went wrong",
-  "RETRY": "Retry"
+  "RETRY": "Retry",
+  "LOGIN": "Login",
+  "ENTER_PHONE_NUMBER": "Enter your phone number",
+  "PHONE_ERROR_MESSAGE": "Must be 9 characters",
+  "ENTER_CODE": "Enter SMS code",
+  "ENTER_VALID_CODE": "Enter valid code"
 }

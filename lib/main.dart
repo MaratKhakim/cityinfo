@@ -1,25 +1,24 @@
-import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 
 import 'app.dart';
 import 'network/auth_service.dart';
 import 'screen/login_screen.dart';
-import 'widget/loading_circle.dart';
-import 'screen/service_list_screen.dart';
 import 'screen/profile_screen.dart';
+import 'screen/service_list_screen.dart';
 import 'utils/app_localizations.dart';
+import 'widget/loading_circle.dart';
 
 void main() => runApp(
-  ChangeNotifierProvider(
-    child: MyApp(),
-    builder: (BuildContext context) => AuthService(),
-  ),
-);
+      ChangeNotifierProvider(
+        child: MyApp(),
+        builder: (BuildContext context) => AuthService(),
+      ),
+    );
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -53,10 +52,11 @@ class MyApp extends StatelessWidget {
         builder: (context, AsyncSnapshot<FirebaseUser> snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             if (snapshot.error != null) {
-              print("error");
               return Text(snapshot.error.toString());
             }
-            //return snapshot.hasData ? MyHomePage() : LoginScreen();
+
+            if (!snapshot.hasData) return LoginScreen();
+
             return MyHomePage();
           } else {
             return Scaffold(

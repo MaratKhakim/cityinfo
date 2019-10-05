@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:convert';
 
+import '../app.dart';
 import '../network/auth_service.dart';
+import '../utils/app_localizations.dart';
+import '../model/user.dart';
 
 class LoginScreen extends StatefulWidget {
-
   static const routName = '/login_screen';
 
   @override
@@ -45,12 +49,13 @@ class _LoginScreenState extends State<LoginScreen> {
     };
 
     await FirebaseAuth.instance.verifyPhoneNumber(
-        phoneNumber: this.phoneNo,
-        timeout: const Duration(seconds: 5),
-        verificationCompleted: verificationCompleted,
-        verificationFailed: verificationFailed,
-        codeSent: smsCodeSent,
-        codeAutoRetrievalTimeout: autoRetrievalTimeout);
+      phoneNumber: this.phoneNo,
+      timeout: const Duration(seconds: 5),
+      verificationCompleted: verificationCompleted,
+      verificationFailed: verificationFailed,
+      codeSent: smsCodeSent,
+      codeAutoRetrievalTimeout: autoRetrievalTimeout,
+    );
   }
 
   Future<bool> smsCodeDialog(BuildContext context) {
@@ -59,7 +64,7 @@ class _LoginScreenState extends State<LoginScreen> {
         barrierDismissible: false,
         builder: (BuildContext ctx) {
           return AlertDialog(
-            title: Text('Enter SMS Code'),
+            title: Text(AppLocalizations.of(context).translate('ENTER_CODE')),
             content: Form(
               key: key,
               child: TextFormField(
@@ -68,7 +73,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 },
                 validator: (String value) {
                   if (value.isEmpty || value.length < 6) {
-                    return 'Enter valid code';
+                    return AppLocalizations.of(context)
+                        .translate('ENTER_VALID_CODE');
                   }
                   return null;
                 },
@@ -78,12 +84,11 @@ class _LoginScreenState extends State<LoginScreen> {
             contentPadding: EdgeInsets.all(10),
             actions: <Widget>[
               FlatButton(
-                child: Text('Done'),
+                child: Text('OK'),
                 onPressed: () {
                   if (key.currentState.validate()) {
                     sign(context);
-                    print('smscode: $smsCode');
-                  };
+                  }
                 },
               ),
             ],
@@ -97,15 +102,14 @@ class _LoginScreenState extends State<LoginScreen> {
         });
   }
 
-  void sign(BuildContext context) async {
+  void sign(BuildContext context) {
     FirebaseAuth.instance.currentUser().then((FirebaseUser user) {
       if (user != null) {
         print('User $user');
         Navigator.of(context).pop();
-        Navigator.of(context).pushNamed('/homepage');
+        Navigator.of(context).pushNamed(MyHomePage.routName);
       } else {
         print('User is null');
-        Navigator.of(context).pop();
         loginWithCredential(context);
       }
     });
@@ -120,12 +124,16 @@ class _LoginScreenState extends State<LoginScreen> {
     try {
       AuthResult result =
           await Provider.of<AuthService>(context).loginUser(credential);
+      Navigator.of(context).pop();
 
-      print('signed in with phone number successful: user -> ${result.user}');
-      Navigator.of(context).pushNamed('/homePage');
+      FirebaseUser firebaseUser = result.user;
+      User user = User(uid: firebaseUser.uid, phoneNumber: firebaseUser.phoneNumber);
+
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs.setString('user', json.encode(user));
+
+      Navigator.of(context).pushNamed(MyHomePage.routName);
     } catch (err) {
-      print('Mara error');
-      this.phoneNo = '+998';
       print(err);
     }
   }
@@ -141,7 +149,7 @@ class _LoginScreenState extends State<LoginScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text(
-                'Enter your phone number',
+                AppLocalizations.of(context).translate('ENTER_PHONE_NUMBER'),
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 18,
@@ -156,12 +164,12 @@ class _LoginScreenState extends State<LoginScreen> {
                   key: formKey,
                   child: TextFormField(
                     maxLength: 9,
-                    textAlign: TextAlign.justify,
+                    textAlign: TextAlign.start,
                     validator: (String value) {
                       if (value.length == 9) {
                         return null;
                       }
-                      return 'Must be 9 characters.';
+                      return AppLocalizations.of(context).translate('PHONE_ERROR_MESSAGE');
                     },
                     keyboardType: TextInputType.numberWithOptions(),
                     decoration: InputDecoration(
@@ -169,7 +177,11 @@ class _LoginScreenState extends State<LoginScreen> {
                       hintText: '99 1234567',
                     ),
                     onSaved: (value) {
-                      this.phoneNo = this.phoneNo + value;
+                      if (this.phoneNo.length < 13)
+                        this.phoneNo = this.phoneNo + value;
+                    },
+                    onTap: () {
+                      this.phoneNo = '+998';
                     },
                   ),
                 ),
@@ -184,14 +196,12 @@ class _LoginScreenState extends State<LoginScreen> {
                     formKey.currentState.save();
                     verifyPhone(context);
                     print(this.phoneNo);
-                  } else {
-                    //formKey.currentState.reset();
                   }
                 },
-                child: Text('Login'),
+                child: Text(AppLocalizations.of(context).translate('LOGIN')),
                 textColor: Colors.white,
                 elevation: 7,
-                color: Colors.blue,
+                color: Colors.green,
               ),
             ],
           ),
