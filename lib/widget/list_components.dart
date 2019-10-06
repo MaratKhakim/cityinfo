@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../model/category.dart';
 import '../network/network.dart';
@@ -45,9 +46,21 @@ class ListComponents extends StatelessWidget {
                   _categories[index].address,
                   maxLines: 1,
                 ),
-                trailing: Icon(
-                  Icons.call,
-                  color: Colors.blue,
+                trailing: IconButton(
+                  icon: Icon(
+                    Icons.call,
+                    color: Colors.blue,
+                  ),
+                  onPressed: () {
+                    canLaunch('tel:${_categories[index].phoneNumber}')
+                        .then((_) {
+                      launch('tel:${_categories[index].phoneNumber}')
+                          .catchError(() {
+                            throw 'Could not launch phone call';
+                        },
+                      );
+                    });
+                  },
                 ),
               ),
             ),
