@@ -22,7 +22,7 @@ class _ServiceListScreenState extends State<ServiceListScreen> {
 
   Widget _buildBody(AsyncSnapshot<List<dynamic>> snapshot, int index) {
 
-    if (snapshot.connectionState != ConnectionState.done) {
+    if (snapshot.connectionState != ConnectionState.done && !snapshot.hasData) {
       return LoadingCircle();
     }
 

@@ -52,6 +52,14 @@ flutter:
     - assets/i18n/en.json
     - assets/i18n/ru.json
     - assets/i18n/uz.json
+    - assets/images/cafe.png
+    - assets/images/culture.png
+    - assets/images/hotel.png
+    - assets/images/market.png
+    - assets/images/service.png
+    - assets/images/sport.png
+    - assets/images/taxi.png
+    - assets/images/transport.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:

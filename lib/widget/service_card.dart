@@ -37,7 +37,7 @@ class ServiceCard extends StatelessWidget {
                 height: 120,
                 width: 120,
                 padding: EdgeInsets.all(10.0),
-                child: Image.network(_services[_index - 1].imageUrl),
+                child: Image.asset(_services[_index - 1].imageUrl),
               ),
             ),
             Container(
