@@ -4,7 +4,6 @@ import '../model/category.dart';
 import '../network/network.dart';
 import '../widget/list_components.dart';
 import '../widget/loading_circle.dart';
-import '../widget/slide_components.dart';
 import '../utils/app_localizations.dart';
 
 class ServiceListScreen extends StatefulWidget {
@@ -20,7 +19,7 @@ class _ServiceListScreenState extends State<ServiceListScreen> {
     setState(() {});
   }
 
-  Widget _buildBody(AsyncSnapshot<List<dynamic>> snapshot, int index) {
+  Widget _buildBody(AsyncSnapshot<List<dynamic>> snapshot) {
 
     if (snapshot.connectionState != ConnectionState.done && !snapshot.hasData) {
       return LoadingCircle();
@@ -29,9 +28,7 @@ class _ServiceListScreenState extends State<ServiceListScreen> {
     if (snapshot.hasData) {
       final List<Category> _categories =
           snapshot.data.map((i) => Category.fromJson(i)).toList();
-      return index & 1 == 0
-          ? ListComponents(_categories)
-          : SlideComponents(_categories);
+      return ListComponents(_categories);
     } else {
       return AlertDialog(
         title: Text(AppLocalizations.of(context).translate('ERROR_OCCURED_TITLE')),
@@ -62,7 +59,7 @@ class _ServiceListScreenState extends State<ServiceListScreen> {
           appBar: AppBar(
             title: Text(title),
           ),
-          body: _buildBody(snapshot, _index),
+          body: _buildBody(snapshot),
         );
       },
     );

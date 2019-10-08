@@ -55,7 +55,7 @@ class MyApp extends StatelessWidget {
               return Text(snapshot.error.toString());
             }
 
-            if (!snapshot.hasData) return LoginScreen();
+            //if (!snapshot.hasData) return LoginScreen();
 
             return MyHomePage();
           } else {
