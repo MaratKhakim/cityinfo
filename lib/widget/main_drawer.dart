@@ -13,25 +13,22 @@ class MainDrawer extends StatelessWidget {
           DrawerHeader(
             child: Center(
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  CircleAvatar(
-                    backgroundColor: Colors.white,
-                    radius: 50,
-                    child: Icon(
-                      Icons.face,
-                      size: 60,
-                    ),
-                  ),
+                  Image.asset('assets/images/enterance_logo.png'),
                   SizedBox(height: 16),
-                  Text('+998 99 1234567')
+                  Text(
+                    '+998 99 1234567',
+                    style: TextStyle(color: Colors.white),
+                  ),
                 ],
               ),
             ),
             decoration: BoxDecoration(
-              color: Theme.of(context).primaryColorLight,
+              color: Theme.of(context).primaryColor,
             ),
           ),
-          ListTile(
+          /*ListTile(
             leading: Icon(Icons.settings),
             title: Text(AppLocalizations.of(context).translate('SETTINGS')),
             onTap: () {
@@ -39,7 +36,7 @@ class MainDrawer extends StatelessWidget {
               Navigator.of(context).pushNamed(ProfileScreen.routName);
             },
           ),
-          Divider(),
+          Divider(),*/
           ListTile(
             leading: Icon(Icons.rate_review),
             title: Text(AppLocalizations.of(context).translate('RATE_US')),
