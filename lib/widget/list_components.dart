@@ -4,14 +4,19 @@ import 'package:url_launcher/url_launcher.dart';
 import '../model/category.dart';
 import '../network/network.dart';
 import '../screen/category_screen.dart';
+import '../model/service.dart';
+import '../model/services_repository.dart';
 
 class ListComponents extends StatelessWidget {
   final List<Category> _categories;
+  final int _serviceIndex;
 
-  ListComponents(this._categories);
+  ListComponents(this._categories, this._serviceIndex);
 
   @override
   Widget build(BuildContext context) {
+    final List<Service> services = ServicesRepository.loadServices(context);
+
     return Padding(
       padding: EdgeInsets.all(8),
       child: ListView.builder(
@@ -31,8 +36,10 @@ class ListComponents extends StatelessWidget {
               child: ListTile(
                 leading: Hero(
                   tag: _categories[index].name,
-                  child: Image.network(
-                      '${Network.imageURL}/${_categories[index].imageUrl}'),
+                  child: FadeInImage.assetNetwork(
+                    placeholder: services[_serviceIndex-1].imageUrl,
+                    image: '${Network.imageURL}/${_categories[index].imageUrl}',
+                  ),
                 ),
                 title: Text(
                   _categories[index].name,
