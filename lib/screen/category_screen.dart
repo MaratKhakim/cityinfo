@@ -3,13 +3,16 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../model/category.dart';
 import '../network/network.dart';
+import '../model/services_repository.dart';
+import '../model/service.dart';
 
 class CategoryScreen extends StatelessWidget {
   static const routName = '/category_screen';
 
-  Category _restaurant;
+  Category _category;
+  int _serviceIndex;
 
-  CategoryScreen(this._restaurant);
+  CategoryScreen(this._category, this._serviceIndex);
 
   Widget _openUrl(String scheme, String url, IconData icon) {
     return InkWell(
@@ -38,6 +41,8 @@ class CategoryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final List<Service> services = ServicesRepository.loadServices(context);
+
     return Scaffold(
       backgroundColor: Color(0xFF21BFBD),
       body: Padding(
@@ -49,16 +54,17 @@ class CategoryScreen extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   Hero(
-                    tag: _restaurant.name,
-                    child: Image.network(
-                      '${Network.imageURL}/${_restaurant.imageUrl}',
-                      height: 120,
-                      width: 120,
+                    tag: _category.name,
+                    child: FadeInImage.assetNetwork(
+                        placeholder: services[_serviceIndex-1].imageUrl,
+                        image: '${Network.imageURL}/${_category.imageUrl}',
+                        height: 120,
+                        width: 120,
                     ),
                   ),
                   SizedBox(height: 20),
                   Text(
-                    _restaurant.name,
+                    _category.name,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
@@ -84,12 +90,12 @@ class CategoryScreen extends StatelessWidget {
                     children: <Widget>[
                       ListTile(
                         leading: Icon(Icons.location_on),
-                        title: Text(_restaurant.address),
+                        title: Text(_category.address),
                       ),
                       _openUrl(
-                          'http', _restaurant.website, Icons.open_in_browser),
-                      _openUrl('mailto', _restaurant.email, Icons.email),
-                      _openUrl('tel', _restaurant.phoneNumber, Icons.phone),
+                          'http', _category.website, Icons.open_in_browser),
+                      _openUrl('mailto', _category.email, Icons.email),
+                      _openUrl('tel', _category.phoneNumber, Icons.phone),
                     ],
                   ),
                 ),

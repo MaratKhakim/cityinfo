@@ -19,16 +19,14 @@ class _ServiceListScreenState extends State<ServiceListScreen> {
     setState(() {});
   }
 
-  Widget _buildBody(AsyncSnapshot<List<dynamic>> snapshot, int index) {
+  Widget _buildBody(AsyncSnapshot<List<Category>> snapshot, int index) {
 
     if (snapshot.connectionState != ConnectionState.done && !snapshot.hasData) {
       return LoadingCircle();
     }
 
     if (snapshot.hasData) {
-      final List<Category> _categories =
-          snapshot.data.map((i) => Category.fromJson(i)).toList();
-      return ListComponents(_categories, index);
+      return ListComponents(snapshot.data, index);
     } else {
       return AlertDialog(
         title: Text(AppLocalizations.of(context).translate('ERROR_OCCURED_TITLE')),
@@ -54,7 +52,7 @@ class _ServiceListScreenState extends State<ServiceListScreen> {
 
     return FutureBuilder(
       future: Network.fetchService(_cityId, _index),
-      builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
+      builder: (context, AsyncSnapshot<List<Category>> snapshot) {
         return Scaffold(
           appBar: AppBar(
             title: Text(title),

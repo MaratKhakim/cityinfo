@@ -27,7 +27,7 @@ class ListComponents extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => CategoryScreen(_categories[index]),
+                  builder: (context) => CategoryScreen(_categories[index], _serviceIndex),
                 ),
               );
             },
