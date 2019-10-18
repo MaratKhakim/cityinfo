@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import 'widget/main_drawer.dart';
 import 'widget/service_card.dart';
 import 'model/service.dart';
 import 'model/services_repository.dart';
 import 'utils/app_localizations.dart';
+import 'utils/sharedprefs_helper.dart';
 
 class MyHomePage extends StatefulWidget {
 
@@ -33,20 +33,21 @@ class _MyHomePageState extends State<MyHomePage> {
     _setInitCidyId();
   }
 
-  Future<int> _getCityIdFromSharedPrefs() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getInt('city') ?? 2;
+  @override
+  void dispose() {
+    super.dispose();
+    SharedPrefsHelper.dispose();
   }
 
   Future<void> _setCityId(int id) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setInt('city', id);
+    await SharedPrefsHelper.setInt('city', id);
   }
 
   Future<void> _setInitCidyId() async {
-    int _id = await _getCityIdFromSharedPrefs();
+    await SharedPrefsHelper.init();
+    int _id = SharedPrefsHelper.getInt('city');
     setState(() {
-      _cityId = _id;
+      _cityId = _id==0 ? 2 : _id;
     });
   }
 

@@ -11,7 +11,6 @@ class Network {
 
   static Future<List<Category>> fetchService(int cityId, int index) async {
     final File fetchedFile = await DefaultCacheManager().getSingleFile('$URL/$cityId?cat=$index');
-    print(fetchedFile.path);
     List<String> list = await fetchedFile.readAsLines();
 
     List<dynamic> category = json.decode(list[0]);
