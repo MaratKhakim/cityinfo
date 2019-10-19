@@ -1,11 +1,17 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 
 import '../screen/profile_screen.dart';
 import '../utils/app_localizations.dart';
+import '../utils/sharedprefs_helper.dart';
 
 class MainDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final jsonUser = SharedPrefsHelper.getString('user');
+    final String phoneNumber = json.decode(jsonUser)['phoneNumber'];
+
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
@@ -18,7 +24,7 @@ class MainDrawer extends StatelessWidget {
                   Image.asset('assets/images/enterance_logo.png'),
                   SizedBox(height: 16),
                   Text(
-                    '+998 99 1234567',
+                    phoneNumber,
                     style: TextStyle(color: Colors.white),
                   ),
                 ],
