@@ -9,8 +9,8 @@ import '../model/service.dart';
 class CategoryScreen extends StatelessWidget {
   static const routName = '/category_screen';
 
-  Category _category;
-  int _serviceIndex;
+  final Category _category;
+  final int _serviceIndex;
 
   CategoryScreen(this._category, this._serviceIndex);
 
@@ -31,7 +31,7 @@ class CategoryScreen extends StatelessWidget {
       ),
       onTap: () async {
         if (await canLaunch('$scheme:$url')) {
-          await launch('$scheme:$url');
+          await launch('$scheme://$url');
         } else {
           throw 'Could not launch $url';
         }
@@ -56,18 +56,23 @@ class CategoryScreen extends StatelessWidget {
                   Hero(
                     tag: _category.name,
                     child: FadeInImage.assetNetwork(
-                        placeholder: services[_serviceIndex-1].imageUrl,
-                        image: '${Network.imageURL}/${_category.imageUrl}',
-                        height: 120,
-                        width: 120,
+                      placeholder: services[_serviceIndex - 1].imageUrl,
+                      image: '${Network.imageURL}/${_category.imageUrl}',
+                      height: 120,
+                      width: 120,
                     ),
                   ),
                   SizedBox(height: 20),
-                  Text(
-                    _category.name,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: FittedBox(
+                      child: Text(
+                        _category.name,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                        ),
+                      ),
                     ),
                   ),
                 ],
@@ -89,8 +94,14 @@ class CategoryScreen extends StatelessWidget {
                   child: Column(
                     children: <Widget>[
                       ListTile(
-                        leading: Icon(Icons.location_on),
-                        title: Text(_category.address),
+                        leading: Icon(
+                          Icons.location_on,
+                          color: Colors.blue,
+                        ),
+                        title: Text(
+                          _category.address,
+                          style: TextStyle(color: Colors.black),
+                        ),
                       ),
                       _openUrl(
                           'http', _category.website, Icons.open_in_browser),
